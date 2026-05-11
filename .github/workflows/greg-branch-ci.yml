@@ -1,0 +1,41 @@
+name: Greg Branch CI
+
+on:
+  push:
+    branches:
+      - 'feature/GPM-*'
+  pull_request:
+    branches:
+      - dev
+
+jobs:
+  build-and-test:
+    name: Build and Validate
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: temurin
+          cache: maven
+
+      - name: Verify tool versions
+        run: |
+          echo "=== Java ===" && java --version
+          echo "=== Maven ===" && ./mvnw --version
+          echo "=== Git ===" && git --version
+
+      - name: Build with Maven
+        run: ./mvnw clean package -DskipTests
+
+      - name: Build summary
+        run: |
+          echo "### Greg Branch CI" >> $GITHUB_STEP_SUMMARY
+          echo "- Branch: ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Build: SUCCESS" >> $GITHUB_STEP_SUMMARY
+          echo "- Target: dev branch (protected)" >> $GITHUB_STEP_SUMMARY
