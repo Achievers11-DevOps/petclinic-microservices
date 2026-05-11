@@ -1,29 +1,29 @@
 # GPM-65: Security Architecture Review
 
-## Exposed Services (publicly accessible)
-| Service | Exposure | How |
-|---------|----------|-----|
-| api-gateway | Public | Via ALB on port 80/443 |
-| All others | Internal only | ClusterIP — not accessible outside cluster |
+## Publicly exposed services
+| Service | Exposure | Method |
+|---------|----------|--------|
+| api-gateway | Public | ALB port 80/443 |
+| All others | Internal | ClusterIP only |
 
-## Sensitive configuration areas
-- Database credentials — stored in AWS Secrets Manager, never in code
-- OpenAI API key — stored in AWS Secrets Manager, never in code
-- GitHub Actions secrets — stored in GitHub, never in code or logs
-- Kubernetes secrets — created by External Secrets Operator from Secrets Manager
+## Secret management
+| Secret | Storage | How accessed |
+|--------|---------|-------------|
+| DB credentials | AWS Secrets Manager | ESO → K8s secret |
+| OpenAI key | AWS Secrets Manager | ESO → K8s secret |
+| GitHub tokens | GitHub Secrets | GitHub Actions only |
 
-## Security risks identified
+## Security risks
 | Risk | Severity | Mitigation |
 |------|----------|-----------|
-| Hardcoded secrets | High | Use Secrets Manager always |
-| Exposed admin endpoints | Medium | Admin server behind VPN or internal only |
-| H2 console exposed locally | Low | Only in local dev, not in production |
-| No authentication on APIs | Medium | Acceptable for demo, add in production |
-| Single api-gateway | Medium | Add replica in production |
+| No API authentication | Medium | Acceptable for demo |
+| H2 console exposed locally | Low | Local dev only |
+| Single api-gateway replica | Medium | Add replica in production |
+| Admin endpoints public | Medium | Restrict to internal only |
 
-## Recommendations
-- Add API authentication (JWT/OAuth2) for production
-- Enable HTTPS on all internal service communication
-- Restrict admin-server to internal network only
+## Recommendations for production
+- Add JWT/OAuth2 authentication to api-gateway
 - Enable AWS WAF on the ALB
-- Regular rotation of all secrets
+- Restrict admin-server to internal network
+- Enable HTTPS for internal service communication
+- Rotate all secrets every 90 days

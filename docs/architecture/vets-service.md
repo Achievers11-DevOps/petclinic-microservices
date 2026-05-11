@@ -12,7 +12,7 @@ Manages veterinarian data in the PetClinic application.
 - Provide vet listing for the application UI
 
 ## Database
-MySQL — table: vets, specialities, vet_specialities
+MySQL — tables: vets, specialities, vet_specialities
 Local: H2 in-memory
 Production: RDS MySQL
 

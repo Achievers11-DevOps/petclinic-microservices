@@ -1,30 +1,28 @@
 # GPM-58: Databases and Data Storage Per Service
 
 ## Service to Database Mapping
-| Service | Database | Tables | Notes |
-|---------|----------|--------|-------|
-| customers-service | MySQL/H2 | owners, pets, types | Owner and pet data |
-| vets-service | MySQL/H2 | vets, specialities, vet_specialities | Vet data |
-| visits-service | MySQL/H2 | visits | Visit records |
-| api-gateway | None | — | Stateless router |
-| config-server | None | — | Reads from filesystem/git |
-| discovery-server | None | — | In-memory registry |
-| admin-server | None | — | Reads from actuator endpoints |
-| genai-service | None | — | Stateless AI proxy |
+| Service | Database | Tables |
+|---------|----------|--------|
+| customers-service | MySQL/H2 | owners, pets, types |
+| vets-service | MySQL/H2 | vets, specialities, vet_specialities |
+| visits-service | MySQL/H2 | visits |
+| api-gateway | None | stateless router |
+| config-server | None | reads from filesystem |
+| discovery-server | None | in-memory registry |
+| admin-server | None | reads actuator endpoints |
+| genai-service | None | stateless AI proxy |
 
 ## Local environment
-- Database: H2 in-memory
+- H2 in-memory database
 - Data resets on every container restart
 - No persistence between sessions
 
-## Production environment (AWS)
-- Database: Amazon RDS MySQL 8.0
-- Instance: db.t3.micro
+## Production environment
+- Amazon RDS MySQL 8.0 (db.t3.micro)
 - Persistent across restarts
-- Credentials stored in AWS Secrets Manager
-- Synced to Kubernetes via External Secrets Operator as mysql-secret
+- Credentials from AWS Secrets Manager via ESO
 
-## Database credentials in production
+## Database credentials in Kubernetes
 - MYSQL_HOST — RDS endpoint
 - MYSQL_USER — petclinic
 - MYSQL_PASSWORD — from Secrets Manager

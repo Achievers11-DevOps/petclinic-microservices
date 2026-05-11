@@ -1,39 +1,37 @@
-# GPM-59: Environment Variables and Secrets
+# GPM-59: Environment Variables and Secrets Required
 
-## Required Environment Variables Per Service
+## MySQL services (customers, vets, visits)
+| Variable | Source |
+|----------|--------|
+| SPRING_PROFILES_ACTIVE | docker-compose.yml (docker,mysql) |
+| MYSQL_HOST | Kubernetes secret: mysql-secret |
+| MYSQL_USER | Kubernetes secret: mysql-secret |
+| MYSQL_PASSWORD | Kubernetes secret: mysql-secret |
+| MYSQL_DATABASE | Kubernetes secret: mysql-secret |
 
-### customers-service, vets-service, visits-service
-| Variable | Source | Value |
-|----------|--------|-------|
-| SPRING_PROFILES_ACTIVE | docker-compose.yml | docker,mysql |
-| MYSQL_HOST | Kubernetes secret: mysql-secret | RDS endpoint |
-| MYSQL_USER | Kubernetes secret: mysql-secret | petclinic |
-| MYSQL_PASSWORD | Kubernetes secret: mysql-secret | from Secrets Manager |
-| MYSQL_DATABASE | Kubernetes secret: mysql-secret | petclinic |
+## GenAI service
+| Variable | Source |
+|----------|--------|
+| AZURE_OPENAI_KEY | Kubernetes secret: genai-secret |
+| AZURE_OPENAI_ENDPOINT | Kubernetes secret: genai-secret |
 
-### genai-service
-| Variable | Source | Value |
-|----------|--------|-------|
-| AZURE_OPENAI_KEY | Kubernetes secret: genai-secret | from Secrets Manager |
-| AZURE_OPENAI_ENDPOINT | Kubernetes secret: genai-secret | Azure endpoint URL |
-
-## AWS Secrets Manager secrets
+## AWS Secrets Manager
 | Secret name | Contents |
 |-------------|----------|
 | petclinic/db-credentials | username, password, endpoint, port, dbname |
-| petclinic/openai-api-key | OpenAI or Azure OpenAI API key |
+| petclinic/openai-api-key | Azure OpenAI API key |
 
-## GitHub Actions secrets required
+## GitHub Actions secrets
 | Secret | Purpose |
 |--------|---------|
-| AWS_ACCESS_KEY_ID | ECR login and EKS deploy |
-| AWS_SECRET_ACCESS_KEY | ECR login and EKS deploy |
+| AWS_ACCESS_KEY_ID | ECR and EKS access |
+| AWS_SECRET_ACCESS_KEY | ECR and EKS access |
 | AWS_REGION | us-east-1 |
-| AWS_ACCOUNT_ID | ECR registry URL construction |
+| AWS_ACCOUNT_ID | ECR registry URL |
 | PLATFORM_REPO_PAT | Push image tag to platform repo |
 
 ## Security rules
-- Never hardcode secrets in code or config files
+- Never hardcode secrets in code
 - Never commit secrets to GitHub
-- Always use Secrets Manager + ESO in production
-- Rotate keys immediately if accidentally exposed
+- Always use Secrets Manager in production
+- Rotate keys immediately if exposed

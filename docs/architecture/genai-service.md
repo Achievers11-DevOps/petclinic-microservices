@@ -8,7 +8,7 @@ AI-powered chat assistant for the PetClinic application.
 
 ## Main business functions
 - Accept natural language questions from users
-- Send questions to OpenAI/Azure OpenAI API
+- Send questions to Azure OpenAI API
 - Return AI-generated responses to the UI
 
 ## Dependencies

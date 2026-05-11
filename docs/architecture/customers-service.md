@@ -13,8 +13,8 @@ Manages all owner and pet data in the PetClinic application.
 - Retrieve owner and pet information
 
 ## Database
-MySQL — table: owners, pets, types
-Local Docker Compose: H2 in-memory database (resets on restart)
+MySQL — tables: owners, pets, types
+Local Docker Compose: H2 in-memory (resets on restart)
 Production AWS: RDS MySQL (persistent)
 
 ## API endpoints

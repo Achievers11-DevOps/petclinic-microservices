@@ -1,16 +1,13 @@
 # GPM-61: Service Health Check Endpoints
 
-## Spring Boot Actuator Endpoints
-All PetClinic microservices use Spring Boot Actuator for health checks.
-
+## Spring Boot Actuator endpoints (all services)
 | Endpoint | Purpose |
 |----------|---------|
-| /actuator/health | Overall health status — used by Docker/Kubernetes |
+| /actuator/health | Overall health — used by Docker and Kubernetes |
+| /actuator/prometheus | Metrics scraped by Prometheus every 15s |
 | /actuator/info | Service information |
-| /actuator/metrics | Application metrics |
-| /actuator/prometheus | Prometheus-format metrics (scraped by Prometheus) |
 
-## Health check per service
+## Health URLs per service
 | Service | Health URL |
 |---------|-----------|
 | config-server | http://localhost:8888/actuator/health |
@@ -22,10 +19,9 @@ All PetClinic microservices use Spring Boot Actuator for health checks.
 | admin-server | http://localhost:9090/actuator/health |
 | genai-service | http://localhost:8084/actuator/health |
 
-## How Docker Compose uses health checks
-- config-server: healthcheck runs every 10s
-- Other services use depends_on condition: service_healthy
-- Kubernetes: uses readinessProbe and livenessProbe on /actuator/health
-
-## Expected response when healthy
+## Expected healthy response
 {"status":"UP"}
+
+## Kubernetes probes
+- readinessProbe: /actuator/health (is service ready to receive traffic?)
+- livenessProbe: /actuator/health (is service still alive?)
