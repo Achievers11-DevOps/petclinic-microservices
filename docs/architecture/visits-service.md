@@ -13,15 +13,15 @@ Manages pet visit records in the PetClinic application.
 
 ## Database
 MySQL — table: visits
-In local Docker Compose: H2 in-memory database
-In production: RDS MySQL
+Local: H2 in-memory
+Production: RDS MySQL
 
-## API endpoints (approximate)
+## API endpoints
 - GET /visits — list all visits
 - GET /pets/{petId}/visits — get visit history for a pet
 - POST /owners/{ownerId}/pets/{petId}/visits — create new visit
 
 ## Dependencies
-- config-server (configuration)
-- discovery-server (service registration)
+- config-server
+- discovery-server
 - MySQL/H2 database
