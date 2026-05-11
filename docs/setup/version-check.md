@@ -1,25 +1,18 @@
-# GPM-36: Tool Version Verification
+# GPM-36: Tool Version Verification — Greg's Machine
 
-## Commands Run
-java --version
-./mvnw --version
-git --version
-docker --version
-docker compose version
+## Command Run
+java --version && ./mvnw --version && git --version && docker --version && docker compose version
 
-## Expected Minimum Versions
-| Tool | Minimum Version |
-|------|----------------|
-| Java | 17 |
-| Maven | 3.9.x |
-| Git | 2.x |
-| Docker | 24.x |
-| Docker Compose | 2.x |
-| Terraform | 1.3.0 |
-| kubectl | 1.32.x |
-| eksctl | 0.180.x |
+## Verified Versions on Greg's Machine (WSL2 Ubuntu)
+| Tool | Version | Requirement | Status |
+|------|---------|-------------|--------|
+| Java | 17.0.18 OpenJDK | 17 | Pass |
+| Maven | 3.9.8 | 3.9.x | Pass |
+| Git | 2.34.1 | 2.x | Pass |
+| Docker | 29.4.2 | 24.x minimum | Pass |
+| Docker Compose | v5.1.3 | v2 | Pass |
 
 ## Notes
-- Java must be version 17 exactly — Spring Boot 3.x requires it
-- Docker Compose v2 uses 'docker compose' not 'docker-compose'
-- Terraform must be >= 1.3.0 as required by Osenat's README
+- Java 17 confirmed — required for Spring Boot 3.x
+- Docker Compose v5.1.3 uses 'docker compose' command not 'docker-compose'
+- All tools verified on WSL2 Ubuntu 22.04
