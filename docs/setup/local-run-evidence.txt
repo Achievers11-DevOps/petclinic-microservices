@@ -1,0 +1,12 @@
+NAME                IMAGE                                                COMMAND                  SERVICE             CREATED        STATUS                  PORTS
+admin-server        springcommunity/spring-petclinic-admin-server        "java org.springfram…"   admin-server        10 hours ago   Up 10 hours             0.0.0.0:9090->9090/tcp, [::]:9090->9090/tcp
+api-gateway         springcommunity/spring-petclinic-api-gateway         "java org.springfram…"   api-gateway         10 hours ago   Up 10 hours             0.0.0.0:8080->8080/tcp, [::]:8080->8080/tcp, 8081/tcp
+config-server       springcommunity/spring-petclinic-config-server       "java org.springfram…"   config-server       10 hours ago   Up 10 hours (healthy)   0.0.0.0:8888->8888/tcp, [::]:8888->8888/tcp
+customers-service   springcommunity/spring-petclinic-customers-service   "java org.springfram…"   customers-service   10 hours ago   Up 10 hours             0.0.0.0:8081->8081/tcp, [::]:8081->8081/tcp
+discovery-server    springcommunity/spring-petclinic-discovery-server    "java org.springfram…"   discovery-server    10 hours ago   Up 10 hours (healthy)   0.0.0.0:8761->8761/tcp, [::]:8761->8761/tcp
+genai-service       springcommunity/spring-petclinic-genai-service       "java org.springfram…"   genai-service       10 hours ago   Up 10 hours             8081/tcp, 0.0.0.0:8084->8084/tcp, [::]:8084->8084/tcp
+grafana-server      petclinic-microservices-grafana-server               "/run.sh"                grafana-server      10 hours ago   Up 10 hours             0.0.0.0:3030->3000/tcp, [::]:3030->3000/tcp
+prometheus-server   petclinic-microservices-prometheus-server            "/bin/prometheus --c…"   prometheus-server   10 hours ago   Up 10 hours             0.0.0.0:9091->9090/tcp, [::]:9091->9090/tcp
+tracing-server      openzipkin/zipkin                                    "start-zipkin"           tracing-server      10 hours ago   Up 10 hours (healthy)   9410/tcp, 0.0.0.0:9411->9411/tcp, [::]:9411->9411/tcp
+vets-service        springcommunity/spring-petclinic-vets-service        "java org.springfram…"   vets-service        10 hours ago   Up 10 hours             8081/tcp, 0.0.0.0:8083->8083/tcp, [::]:8083->8083/tcp
+visits-service      springcommunity/spring-petclinic-visits-service      "java org.springfram…"   visits-service      10 hours ago   Up 10 hours             0.0.0.0:8082->8082/tcp, [::]:8082->8082/tcp, 9090/tcp
