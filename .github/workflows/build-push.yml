@@ -1,9 +1,9 @@
-# Trigger to deploy
+# Trigger to deploys
 name: Build and Push Docker Images
 
 on:
   push:
-    branches: [main]
+    branches: [main, ft/app-build]
 
   pull_request:
     branches: [main]

@@ -1,4 +1,23 @@
 Trigger admin-server
+<<<<<<< HEAD
+<<<<<<< HEAD
 trigger one
 triger two
 trigger three
+=======
+trigger 1
+<<<<<<< HEAD
+>>>>>>> 098fe1f (chore: triggerd all seervices)
+=======
+trigger 1
+trigger 2
+<<<<<<< HEAD
+>>>>>>> bc825ec (chore: triggerd all service the second time)
+=======
+trigger 2
+trigger 3
+>>>>>>> e5bbb32 (chore: triggerd 3 microservices)
+=======
+trigger 3
+trigger 4
+>>>>>>> 6243be4 (chore: trigger all services)
